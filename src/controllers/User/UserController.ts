@@ -1,6 +1,8 @@
 import { Request, response, Response } from "express";
 import { User } from "../../models/Users/Users";
 import { UserRepository } from "../../repositories/User/UserRepository";
+import { cryptPassword } from "../../services/cryptPassword";
+import { userAlreadyExists } from "../../services/userAlreadyExists";
 
 class UserController {
     private repository;
@@ -11,7 +13,9 @@ class UserController {
     async create(request: Request, response: Response): Promise<Response> {
         const {name, email, password} = request.body
 
-        const user = await this.repository.create({data: {name, email, password}})
+        await userAlreadyExists({email: email})
+
+        const user = await this.repository.create({data: {name, email, password: await cryptPassword({password, rounds: 10})}})
 
         return response.status(201).json(user)
     }
