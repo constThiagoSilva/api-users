@@ -7,6 +7,10 @@ import {
 } from "../../interfaces/IRepository";
 import { User } from "../../models/Users/Users";
 
+interface findByEmailDTO {
+  email: string
+}
+
 class UserRepository implements IRepository {
   constructor(private database: any) {
     this.database = User;
@@ -21,8 +25,11 @@ class UserRepository implements IRepository {
   async read(): Promise<IUser[]> {
     return this.database.findAll();
   }
-  delete({ id }: DeleteDTO): Promise<void> {
+  async delete({ id }: DeleteDTO): Promise<void> {
     return this.database.destroy({where: {id: id}})
+  }
+  async findByEmail({email}: findByEmailDTO) {
+    return this.database.findOne({where: {email: email}})
   }
 }
 
