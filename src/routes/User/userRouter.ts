@@ -1,11 +1,22 @@
 import { Router } from "express";
 import { UserController } from "../../controllers/User/UserController";
+import { userAlreadyExists } from "../../services/userAlreadyExists";
+
+import bcrypt from 'bcrypt'
+import { UserRepository } from "../../repositories/User/UserRepository";
+import { User } from "../../models/Users/Users";
+import { generateToken } from "../../services/generateToken";
+import { authenticateToken } from "../../middlewares/authenticateToken";
 
 const userRouter = Router()
 
-userRouter.post('/add', async (request, response) => {
+userRouter.post('/auth/register', async (request, response) => {
     return await new UserController().create(request, response)
 })
+userRouter.post('/auth/login',async (request, response) => {
+    return await new UserController().login(request, response)
+})
+
 userRouter.get('/', async (request, response) => {
     return await new UserController().read(request, response)
 })

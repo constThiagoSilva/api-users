@@ -28,7 +28,7 @@ class UserRepository implements IRepository {
   async delete({ id }: DeleteDTO): Promise<void> {
     return this.database.destroy({where: {id: id}})
   }
-  async findByEmail({email}: findByEmailDTO) {
+  async findByEmail({email}: findByEmailDTO): Promise<IUser> {
     return this.database.findOne({where: {email: email}})
   }
 }
