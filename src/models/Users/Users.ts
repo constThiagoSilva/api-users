@@ -47,8 +47,4 @@ User.init(
   }
 );
 
-(async () => {
-  await sequelize.sync({ force: true });
-})();
-
 export { User };
