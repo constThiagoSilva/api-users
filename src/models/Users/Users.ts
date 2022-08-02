@@ -4,7 +4,6 @@ import {
   InferAttributes,
   InferCreationAttributes,
   Model,
-  UUIDV4,
 } from "sequelize";
 import { sequelize } from "../index";
 
