@@ -1,17 +1,17 @@
 import {
   CreateDTO,
   DeleteDTO,
-  IRepository,
+  IUserRepository,
   IUser,
   UpdateDTO,
-} from "../../interfaces/IRepository";
+} from "../../interfaces/IUserRepository";
 import { User } from "../../models/Users/Users";
 
 interface findByEmailDTO {
   email: string
 }
 
-class UserRepository implements IRepository {
+class UserRepository implements IUserRepository {
   constructor(private database: any) {
     this.database = User;
   }

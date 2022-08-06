@@ -17,7 +17,7 @@ export interface DeleteDTO {
   id: number;
 }
 
-class IRepository {
+class IUserRepository {
   async create({ data: { name, email, password } }: CreateDTO): Promise<IUser> {
     throw new Error("method not implemented");
   }
@@ -32,4 +32,4 @@ class IRepository {
   }
 }
 
-export { IRepository };
+export { IUserRepository };
