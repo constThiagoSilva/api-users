@@ -15,5 +15,7 @@ taskRouter.post('/update/:id/:user_id', async (request, response) => {
 taskRouter.post('/delete/:id/:user_id', async (request, response) => {
     return await new TaskController().delete(request, response)
 })
-
+taskRouter.post('/situation/:id/:user_id', async (request, response) => {
+    return await new TaskController().changeSituationTask(request, response)
+})
 export {taskRouter}

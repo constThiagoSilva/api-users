@@ -1,6 +1,12 @@
 import { ITask, ITaskRepository, CreateDTO, UpdateDTO, DeleteDTO, ReadDTO} from "../../interfaces/ITaskRepository";
 import { Task } from "../../models/Tasks/Tasks";
 
+interface UpdateSituationDTO {
+  id: number;
+  user_id: number;
+  data: Pick<ITask, 'situation'>
+  
+}
 
 class TaskRepository implements ITaskRepository {
   constructor(private database: any) {
@@ -19,6 +25,10 @@ class TaskRepository implements ITaskRepository {
   }
   delete({ id,user_id }: DeleteDTO): Promise<void> {
     return this.database.destroy({where: {id, user_id}})
+  }
+  updateSituation({id, user_id, data}: UpdateSituationDTO) {
+
+    return this.database.update({...data}, {where: {id, user_id}})
   }
 }
 

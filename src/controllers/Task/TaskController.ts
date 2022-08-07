@@ -44,8 +44,17 @@ class TaskController {
 
     const task = await this.repository.delete({id: Number(id), user_id: Number(user_id)})
 
-    return response.json()
+    return response.json(task)
   }
+  async changeSituationTask(request: Request, response: Response): Promise<Response> {
+    const { id, user_id } = request.params;
+    const {situation} = request.body
+
+    const task = await this.repository.updateSituation({id: Number(id), user_id: Number(user_id), data: {situation}})
+
+    return response.json(task)
+  }
+
 }
 
 export {TaskController}

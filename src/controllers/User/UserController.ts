@@ -72,7 +72,7 @@ class UserController {
 
     if (!await bcrypt.compare(password, userExists.password)) throw new Error('Email or password invalid!')
 
-    return response.json({token: await generateToken({data: userExists.email, secret: String(process.env.AUTH_SECRET), expires: '60s'})})
+    return response.json({token: await generateToken({data: userExists.email, secret: String(process.env.AUTH_SECRET), expires: 300})})
   }
 }
 
