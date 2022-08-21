@@ -17,7 +17,9 @@ export const authenticateToken = (request: Request, response: Response, next: Ne
     jwt.verify(token, String(process.env.AUTH_SECRET), (error, user) => {
         if (error) return response.status(401).json({error: 'Token Invalid'})
 
-        request.user = user
+        console.log(user)
+
+        request.user = (<any>user)
 
         next()
     })

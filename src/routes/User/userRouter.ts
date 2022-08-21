@@ -17,6 +17,10 @@ userRouter.post('/auth/login',async (request, response) => {
     return await new UserController().login(request, response)
 })
 
+userRouter.get('/auth/refresh', authenticateToken , async (request, response) => {
+    return await new UserController().refresh(request, response)
+})
+
 userRouter.get('/', async (request, response) => {
     return await new UserController().read(request, response)
 })

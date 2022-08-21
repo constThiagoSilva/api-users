@@ -74,6 +74,16 @@ class UserController {
 
     return response.json({user: userExists,token: await generateToken({data: userExists.email, secret: String(process.env.AUTH_SECRET), expires: 300})})
   }
+
+  async refresh(request: Request, response: Response): Promise<Response> {
+    const {data} = request.user
+
+    const userExists = await new UserRepository(new User()).findByEmail({email: data})
+
+    if (!userExists) throw new Error('Email or password invalid!')
+
+    return response.json({user: userExists})
+  }
 }
 
 export { UserController };
